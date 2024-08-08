@@ -1,14 +1,50 @@
-# Project_0
-The goal of Project 0 is to create a basic user/item management application with users and books.  Every book belongs to one user. Imagine that this app is for admins managing the users and the items, not for the actual users themselves. 
+# Project_1
+The goal of project 1 is to create a Java Full Stack Employee Reimbursement System (ERS). The main use case of the ERS centers around Employees submitting Reimbursements that can either be accepted or denied by Managers. The tech stack will consist of a React-Based Front end, communicating via HTTP to a Spring-Based Back end. The database will be either a local or cloud-based Postgres database. The entire application will have error handling in place to prevent the user from invoking unauthorized functionalities or entering invalid inputs. 
 
-Tech Requirements 
+Employee User Stories  
 
-Data will be stored in a PostgreSQL Database 
+Users using the application can: 
 
-The Java API sends SQL queries to the Database via JDBC. 
+Create an account (create new User – default role should be employee) 
 
-The Java API uses Javalin to process HTTP Requests 
+Create a new Reimbursement 
 
-HTTP Requests are sent via Postman. 
+See all reimbursement tickets (only their own) 
 
-I highly suggest regularly pushing your code to a GitHub repo!! Not only is it great practice, but it’s a good way to save your work as you go. 
+See only their pending reimbursement tickets 
+
+[Some other functionality of your choice] 
+
+OPTIONAL: Update the description of a pending reimbursement 
+
+ 
+
+Manager User Stories 
+
+Managers using the application can:  
+
+See all reimbursements 
+
+See all pending reimbursements 
+
+Resolve a reimbursement  
+
+(update status from PENDING to APPROVED or DENIED) 
+
+See all Users 
+
+Delete a User 
+
+(should also delete any related reimbursements) 
+
+OPTIONAL: Update an employee’s role to manager 
+
+ 
+
+Validation User Stories (Do Login Last!!) 
+
+Users who are not logged in to the application can ONLY:  
+
+Attempt to log in. 
+
+Users should not be able to access the other user stories before logging in. 
