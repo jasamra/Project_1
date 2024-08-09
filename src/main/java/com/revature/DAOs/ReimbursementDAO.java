@@ -9,9 +9,12 @@ import java.util.List;
 @Repository
 public interface ReimbursementDAO extends JpaRepository<Reimbursement, Long> {
 
-    /* Custom query method to find reimbursements by user ID */
+    // Find reimbursements by user ID
     List<Reimbursement> findByUserUserId(Long userId);
 
-    /* Custom query method to find reimbursements by status */
+    // Find reimbursements by status
     List<Reimbursement> findByStatus(String status);
+    //List<Reimbursement> findByUserIdAndStatus(Long userId, String status);
+    List<Reimbursement> findByUser_UserIdAndStatus(Long userId, String status);
+
 }

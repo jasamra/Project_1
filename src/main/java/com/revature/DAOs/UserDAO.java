@@ -16,6 +16,7 @@ public interface UserDAO extends JpaRepository<User, Long> {
        Since JpaRepository doesn't have that method, we need to make one ourselves
        Spring Data is smart enough to implement this method for us. We just need to define the abstract */
     public User findByUsername(String username);
+    
 
     /* NOTE: The method MUST be named "findByXyz", otherwise it won't work as intended
 

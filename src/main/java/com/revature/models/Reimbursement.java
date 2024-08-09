@@ -18,16 +18,16 @@ public class Reimbursement {
     @Column(nullable = false)
     private Double amount;
 
-    @Column(nullable = false, columnDefinition = "text default 'pending'")
+    @Column(nullable = false, columnDefinition = "TEXT DEFAULT 'pending'")
     private String status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    // Constructors, getters, and setters
-    public Reimbursement() {
-    }
+
+    // Constructors
+    public Reimbursement() {}
 
     public Reimbursement(Long reimbId, String description, Double amount, String status, User user) {
         this.reimbId = reimbId;
@@ -37,6 +37,7 @@ public class Reimbursement {
         this.user = user;
     }
 
+    // Getters and Setters
     public Long getReimbId() {
         return reimbId;
     }
