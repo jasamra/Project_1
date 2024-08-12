@@ -32,6 +32,12 @@ public class ReimbursementService {
     public List<Reimbursement> getReimbursementsByUserId(Long userId) {
         return reimbursementDAO.findByUserUserId(userId);
     }
+    // Method to get a single reimbursement by ID
+    public Reimbursement getReimbursementById(Long reimbId) {
+        return reimbursementDAO.findByReimbId(reimbId).orElseThrow(() ->
+                new RuntimeException("Reimbursement not found with id: " + reimbId));
+    }
+
 
     // Get reimbursements by status
     public List<Reimbursement> getReimbursementsByStatus(String status) {
@@ -57,8 +63,13 @@ public class ReimbursementService {
             throw new RuntimeException("Reimbursement not found.");
         }
     }
-
-
+    // Method to update a reimbursement
+    public Reimbursement updateReimbursement(Reimbursement reimbursement) {
+        if (reimbursement == null) {
+            throw new IllegalArgumentException("Reimbursement cannot be null.");
+        }
+        return reimbursementDAO.save(reimbursement);
+    }
 
     // Delete a reimbursement
     public void deleteReimbursement(Long reimbId) {

@@ -1,0 +1,64 @@
+/* Reset some default styles */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* Add a background color to the entire app */
+body {
+	font-family: 'Arial', sans-serif;
+	background-color: #f0f2f5;
+	color: #333;
+}
+
+/* Style the main container */
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+/* Header Styles */
+header {
+	background-color: #4a90e2;
+	padding: 20px;
+	color: white;
+	text-align: center;
+	margin-bottom: 20px;
+	border-radius: 5px;
+}
+
+/* Button Styles */
+button {
+	background-color: #4a90e2;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #357ab7;
+}
+
+/* Card Styles */
+.card {
+	background-color: white;
+	padding: 20px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer Styles */
+footer {
+	text-align: center;
+	padding: 20px;
+	background-color: #4a90e2;
+	color: white;
+	margin-top: 20px;
+	border-radius: 5px;
+}

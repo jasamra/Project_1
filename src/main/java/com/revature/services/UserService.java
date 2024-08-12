@@ -66,6 +66,17 @@ public class UserService {
         }
     }
 
+    // In UserService
+    public void deleteUserAndReimbursements(Long userId) {
+        Optional<User> user = userDAO.findById(userId);
+        if (!user.isPresent()) {
+            throw new RuntimeException("User not found");
+        }
+        // Assuming Reimbursement has a mapping back to User, this should cascade:
+        userDAO.deleteById(userId);
+    }
+
+
     public void deleteUser(Long userId) {
         if (!userDAO.existsById(userId)) {
             throw new RuntimeException("User not found.");

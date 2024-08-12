@@ -1,0 +1,19 @@
+.login-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	/* This takes the full height of the viewport */
+	background-color: #f0f0f0;
+	/* Background color for visibility, can be changed or removed */
+}
+
+.login-form {
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	/* Optional: Adds shadow for better visibility */
+	border-radius: 8px;
+	/* Optional: Rounds the corners of the form */
+	background: white;
+	/* Background color of the form */
+}

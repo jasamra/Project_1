@@ -1,0 +1,9 @@
+.manager-dashboard {
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 5px;
+}
+
+.manager-dashboard h2 {
+	color: #4a90e2;
+}

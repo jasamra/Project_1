@@ -77,15 +77,24 @@ public class UserController {
             return ResponseEntity.status(400).body(e.getMessage());
         }
     }
-    // delete user
+    // Delete user and their reimbursements, manager role only
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Object> deleteUser(@PathVariable Long userId) {
+    public ResponseEntity<?> deleteUser(@PathVariable Long userId, HttpSession session) {
+        String userRole = (String) session.getAttribute("role");
+
+        // Check if the user is a manager
+        if (!"manager".equals(userRole)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access Denied");
+        }
+
         try {
-            userService.deleteUser(userId);
-            return ResponseEntity.ok("User with ID: " + userId + " was deleted.");
+            // This method needs to be sure that deleting a user also cascades to delete their reimbursements
+            userService.deleteUserAndReimbursements(userId);
+            return ResponseEntity.ok("User and their reimbursements with ID: " + userId + " were deleted.");
         } catch (Exception e) {
-            return ResponseEntity.status(404).body(e.getMessage());
+            return ResponseEntity.status(404).body("User not found: " + e.getMessage());
         }
     }
+
 
 }

@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import com.revature.models.DTO.IncomingReimbursementDTO;
+import com.revature.models.DTO.UpdateStatusRequest;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.services.ReimbursementService;
@@ -121,7 +122,33 @@ public class ReimbursementController {
         }
         return ResponseEntity.ok(reimbursements);
     }
-    //  allow managers to see all reimbursements
+    // Endpoint to update the status of a reimbursement
+    @PutMapping("/{reimbId}/resolve")
+    public ResponseEntity<?> resolveReimbursement(@PathVariable Long reimbId, @RequestBody UpdateStatusRequest updateRequest, HttpSession session) {
+        String userRole = (String) session.getAttribute("role");
+
+        // Authorization check
+        if (!"manager".equals(userRole)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access Denied");
+        }
+
+        // Validate the new status
+        String status = updateRequest.getStatus();
+        if (!"APPROVED".equals(status) && !"DENIED".equals(status)) {
+            return ResponseEntity.badRequest().body("Invalid status. Status must be either 'APPROVED' or 'DENIED'.");
+        }
+
+        // Retrieve and update the reimbursement
+        Reimbursement reimbursement = reimbursementService.getReimbursementById(reimbId);
+        if (reimbursement == null || !"PENDING".equals(reimbursement.getStatus())) {
+            return ResponseEntity.badRequest().body("Reimbursement not found or not in PENDING status.");
+        }
+
+        reimbursement.setStatus(status);
+        Reimbursement updatedReimbursement = reimbursementService.updateReimbursement(reimbursement);
+        return ResponseEntity.ok(updatedReimbursement);
+    }
+
 
     @DeleteMapping("/{userId}")
     public ResponseEntity<Object> deleteUser(@PathVariable Long userId) {
@@ -132,5 +159,6 @@ public class ReimbursementController {
             return ResponseEntity.status(404).body(e.getMessage());
         }
     }
+
 
 }

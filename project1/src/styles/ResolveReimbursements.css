@@ -1,0 +1,71 @@
+/* ResolveReimbursements.css */
+
+.reimbursement-list {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.reimbursement-item {
+	background-color: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 16px;
+	margin-bottom: 16px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reimbursement-item h3 {
+	margin-top: 0;
+	color: #333;
+}
+
+.reimbursement-item p {
+	margin: 8px 0;
+}
+
+.reimbursement-item .reimbursement-status {
+	display: inline-block;
+	padding: 4px 8px;
+	border-radius: 4px;
+	font-weight: bold;
+	color: white;
+}
+
+.status-pending {
+	background-color: #f0ad4e;
+	/* Orange for Pending */
+}
+
+.status-approved {
+	background-color: #5cb85c;
+	/* Green for Approved */
+}
+
+.status-denied {
+	background-color: #d9534f;
+	/* Red for Denied */
+}
+
+.reimbursement-item button {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	padding: 8px 16px;
+	cursor: pointer;
+	margin-right: 8px;
+	font-size: 14px;
+}
+
+.reimbursement-item button:hover {
+	background-color: #0056b3;
+}
+
+.reimbursement-item button.deny {
+	background-color: #d9534f;
+}
+
+.reimbursement-item button.deny:hover {
+	background-color: #c9302c;
+}
