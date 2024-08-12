@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
 import { Reimbursement } from '../interfaces/Reimbursement';
-import '../styles/Reimbursements.css';
+import '../styles/Reimbursement.css';
+
 
 interface Props {
   status?: string; // Optional prop to filter by status

@@ -19,7 +19,8 @@ const handleLogout = () => {
         {/* Employees should only see their own reimbursements */}
         <button onClick={() => navigate('/reimbursements')}>View Your Reimbursements</button>
         <button onClick={() => navigate('/reimbursements/status/PENDING')}>View Your Pending Reimbursements</button>
-        {/* Manager-specific buttons are hidden */}
+       <button onClick={() => navigate('/new-reimbursement')}>Create Reimbursement</button>
+		{/* Manager-specific buttons are hidden */}
         <button onClick={handleLogout}>Logout</button>
       </div>
     </div>

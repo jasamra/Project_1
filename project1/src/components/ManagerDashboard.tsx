@@ -25,6 +25,7 @@ const ManagerDashboard: React.FC = () => {
         <button onClick={() => navigate('/reimbursements/status/PENDING')}>View Pending Reimbursements</button>
         <button onClick={() => navigate('/users')}>View All Users</button>
 		<button onClick={() => navigate('/resolve-reimbursements')}>Resolve Reimbursements</button>
+		<button onClick={() => navigate('/new-reimbursement')}>Create Reimbursement</button>
  		<button onClick={handleLogout}>Logout</button> {/* Logout button */}
       </div>
     </div>

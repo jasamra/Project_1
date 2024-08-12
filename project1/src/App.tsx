@@ -9,6 +9,7 @@ import Reimbursements from './components/Reimbursement'
 import Users from './components/Users';
 import ManagerDashboard from './components/ManagerDashboard';
 import ResolveReimbursements from './components/ResolveReimbursements';
+import NewReimbursement from './components/NewReimbursement';
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
 		  <Route path="/resolve-reimbursements" element={<ResolveReimbursements />} />
           <Route path="/users" element={<Users />} />
 		  <Route path="/reimbursements" element={<Reimbursements />} />
+		 <Route path="/new-reimbursement" element={<NewReimbursement />} />
 		  <Route path="/reimbursements/status/PENDING" element={<Reimbursements status="PENDING" />} />
           
 	
