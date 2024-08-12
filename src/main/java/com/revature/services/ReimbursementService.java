@@ -38,6 +38,10 @@ public class ReimbursementService {
         return reimbursementDAO.findByStatus(status);
     }
 
+    public List<Reimbursement> getReimbursementsByUserIdAndStatus(Long userId, String status) {
+        return reimbursementDAO.findByUser_UserIdAndStatus(userId, status);
+    }
+
     public List<Reimbursement> findByUser_UserIdAndStatus(Long userId, String status) {
         return reimbursementDAO.findByUser_UserIdAndStatus(userId, status);
     }
@@ -53,6 +57,8 @@ public class ReimbursementService {
             throw new RuntimeException("Reimbursement not found.");
         }
     }
+
+
 
     // Delete a reimbursement
     public void deleteReimbursement(Long reimbId) {

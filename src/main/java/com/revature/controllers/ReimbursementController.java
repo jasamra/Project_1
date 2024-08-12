@@ -5,9 +5,12 @@ import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.services.ReimbursementService;
 import com.revature.services.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -49,8 +52,29 @@ public class ReimbursementController {
 
     // Get all reimbursements
     @GetMapping
-    public ResponseEntity<List<Reimbursement>> getAllReimbursements() {
-        return ResponseEntity.ok(reimbursementService.getAllReimbursements());
+    public ResponseEntity<List<Reimbursement>> getReimbursements(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        if ("employee".equals(user.getRole())) {
+            return ResponseEntity.ok(reimbursementService.getReimbursementsByUserId(user.getUserId()));
+        } else if ("manager".equals(user.getRole())) {
+            return ResponseEntity.ok(reimbursementService.getAllReimbursements());
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+    // Get all reimbursements for the logged-in user
+    @GetMapping("/my-reimbursements")
+    public ResponseEntity<List<Reimbursement>> getMyReimbursements(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            List<Reimbursement> reimbursements = reimbursementService.getReimbursementsByUserId(user.getUserId());
+            return ResponseEntity.ok(reimbursements);
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
     }
 
     // Get reimbursements by user ID
@@ -61,10 +85,22 @@ public class ReimbursementController {
 
     // Get reimbursements by status
     @GetMapping("/status/{status}")
-    public ResponseEntity<List<Reimbursement>> getReimbursementsByStatus(@PathVariable String status) {
-        return ResponseEntity.ok(reimbursementService.getReimbursementsByStatus(status));
-    }
+    public ResponseEntity<?> getReimbursementsByStatus(@PathVariable String status, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be logged in to view reimbursements.");
+        }
 
+        if ("manager".equals(user.getRole())) {
+            // Manager can see all reimbursements with the specified status
+            List<Reimbursement> reimbursements = reimbursementService.getReimbursementsByStatus(status);
+            return ResponseEntity.ok(reimbursements);
+        } else {
+            // Employees can only see their own reimbursements with the specified status
+            List<Reimbursement> reimbursements = reimbursementService.findByUser_UserIdAndStatus(user.getUserId(), status);
+            return ResponseEntity.ok(reimbursements);
+        }
+    }
     @PutMapping("/{userId}")
     public ResponseEntity<Object> updateUser(@PathVariable Long userId, @RequestBody String newUsername) {
         try {
